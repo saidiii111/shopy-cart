@@ -11,6 +11,7 @@ let data = [
 
 // draw UI
 function drawUi(items) {
+  productContainer.innerHTML = "";
   items.forEach(function (ele) {
     productContainer.innerHTML += `
         <div onclick='deleteItem(${ele.id})'>
@@ -30,17 +31,20 @@ productBtn.addEventListener("click", addItem),
   function addItem() {
     let productInput = document.getElementById("product-input");
     // simple validation
-    if (product - input.value == "")
+    if (productInput.value == "")
       alert("You Should Enter one Product at least");
-    let lastId = data.length ? data[data.length - 1].id : 1;
+    let lastId = data.length ? data[data.length - 1].id : 0;
     // Add to array
     data.push({ id: ++lastId, name: productInput.value, desc: "good quality" });
+
     let addedItem = data[data.length - 1];
+
     productContainer.innerHTML += `
             <div onclick='deleteItem(${addedItem.id})'>
             ${addedItem.name}
             </div>
             `;
+
     productInput.value = "";
   };
 
@@ -53,5 +57,4 @@ function deleteItem(id) {
   if (index !== -1) {
     data.splice(index, 1);
   }
-  console.log(data);
 }
