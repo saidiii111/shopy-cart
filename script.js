@@ -9,9 +9,14 @@ let data = [
   { id: 4, name: "product4", desc: "standard quality" },
 ];
 
+// draw UI
 function drawUi(items) {
   items.forEach(function (ele) {
-    productContainer.appendChild = "<div>" + ele.name + "</div>";
+    productContainer.innerHTML += `
+        <div onclick='deleteItem(${ele.id})'>
+        ${ele.name}
+        </div>
+        `;
   });
 }
 
@@ -25,10 +30,28 @@ productBtn.addEventListener("click", addItem),
   function addItem() {
     let productInput = document.getElementById("product-input");
     // simple validation
-    if (productInput.value == "") alert("You Should Enter one Product at least");
-
+    if (product - input.value == "")
+      alert("You Should Enter one Product at least");
     let lastId = data.length ? data[data.length - 1].id : 1;
     // Add to array
-    data.push({ name: productInput.value });
-    console.log(data);
+    data.push({ id: ++lastId, name: productInput.value, desc: "good quality" });
+    let addedItem = data[data.length - 1];
+    productContainer.innerHTML += `
+            <div onclick='deleteItem(${addedItem.id})'>
+            ${addedItem.name}
+            </div>
+            `;
+    productInput.value = "";
   };
+
+function deleteItem(id) {
+  let index = data
+    .map(function (i) {
+      return i.id;
+    })
+    .indexOf(id);
+  if (index !== -1) {
+    data.splice(index, 1);
+  }
+  console.log(data);
+}
