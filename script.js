@@ -11,7 +11,7 @@ let data = [
 
 // draw UI
 function drawUi(items) {
-  productContainer.innerHTML = "";
+  productContainer.replaceChild = "";
   items.forEach(function (ele) {
     productContainer.innerHTML += `
         <div onclick='deleteItem(${ele.id})'>
@@ -27,7 +27,7 @@ window.onload = function () {
 };
 
 // Add Item
-productBtn.addEventListener("click", addItem),
+productBtn.addEventListener("click", addItem)
   function addItem() {
     let productInput = document.getElementById("product-input");
     // simple validation
@@ -46,14 +46,12 @@ productBtn.addEventListener("click", addItem),
             `;
 
     productInput.value = "";
-  };
+  }
 
 function deleteItem(id) {
-  let index = data
-    .map(function (i) {
+  let index = data.map(function (i) {
       return i.id;
-    })
-    .indexOf(id);
+    }).indexOf(id);
   if (index !== -1) {
     data.splice(index, 1);
   }
